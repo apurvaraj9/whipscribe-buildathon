@@ -12,6 +12,8 @@ Notes on the 14 screens in `../after/`, before any redesign.
 3. I dropped one of my own first findings. I had flagged "conversion to paid slipped" as a
    grammar error. It is normal business language, and it is what the speaker said.
    The transcript text is the user's content, not the UI. It is not ours to fix.
+4. Items marked **[noticed, confirmed with AI]** are ones I spotted myself but wasn't sure
+   were real problems until the AI pass confirmed them.
 
 **How I measured.** The screenshots are taken at 2x, so 2 image pixels = 1 CSS pixel.
 I read sizes from the pixel grid and checked contrast with the WCAG formula. Contrast read
@@ -33,7 +35,7 @@ These matter more than any single screen, because fixing one fixes many.
    At 320px the screen is 558px tall. The header and tabs take 118px (21%), and the preview bar,
    player and "Audio unavailable" line take 158px (28%). The transcript gets 282px (50%).
    At 390px it gets 67%. With search open, it drops to 52% even at 390px.
-3. **Justified text with hyphenation.** [mine] Body text is justified on a narrow column,
+3. **Justified text with hyphenation.** [noticed, confirmed with AI] Body text is justified on a narrow column,
    which leaves wide gaps ("Thanks   everyone   for   joining") and splits words ("be-cause",
    "seg-ment"). Desktop (screen 14) uses left-aligned text, which reads better.
 4. **The player offers what it can't do.** [AI pass] Every reader screen shows "Audio
@@ -44,7 +46,7 @@ These matter more than any single screen, because fixing one fixes many.
    a stray dot. Desktop shows "1m 44s · EN · Sep 12, 2026, 12:46 PM · ≈ $0.01 est.", so the
    phone hides the date and cost but keeps their separator. On screens 12 and 13 the line
    is a lone "·".
-6. **Three time formats.** [mine] "0:00" in the gutter, "00:00 / 00:00" in the player,
+6. **Three time formats.** [noticed, confirmed with AI] "0:00" in the gutter, "00:00 / 00:00" in the player,
    "1m 44s" in the header.
 7. **Controls shown when they can't be used.** [AI pass] Tabs, search and download stay visible
    on the load-failure (12) and sign-in (13) screens, where there is nothing to search or
@@ -53,7 +55,7 @@ These matter more than any single screen, because fixing one fixes many.
    More and Reading settings open bottom sheets. None of the sheets has a title bar with a
    close button, only a drag handle. The checkbox is on the left in Download but on the
    right in Reading settings.
-9. **Developer words in user copy.** [mine] "HTTP 503", file extensions as button labels
+9. **Developer words in user copy.** [noticed, confirmed with AI] "HTTP 503", file extensions as button labels
    (".srt", ".vtt"), and monospace type for buttons and footers.
 10. **Phone and desktop say different things.** [AI pass] The same upsell is "Keep reading →"
     on the phone and "Download with email" on desktop. The sign-up subtitle is "Your first
@@ -72,7 +74,7 @@ These matter more than any single screen, because fixing one fixes many.
   - The transcript gets 50% of the screen (see cross-screen #2). [AI pass]
   - The preview bar copy truncates to "You're reading the free preview (first 48%)...." with
     four dots. The useful half, why to sign up, is cut off. [AI pass]
-  - Justified text with "be-cause" hyphenation. [mine]
+  - Justified text with "be-cause" hyphenation. [noticed, confirmed with AI]
 - **Why it matters:** this is the smallest phone, where every pixel counts. Half the screen is
   chrome, and the reader sees about five segments at a time.
 
@@ -80,7 +82,7 @@ These matter more than any single screen, because fixing one fixes many.
 - **Keep:** same structure as 01; tabs and icons fit on one row.
 - **Problems:**
   - Same sentence split. [mine]
-  - "seg-ment" hyphenation and wide justified gaps. [mine]
+  - "seg-ment" hyphenation and wide justified gaps. [noticed, confirmed with AI]
   - Visible icon glyphs are small: search ~13px, download ~14x15px, back arrow ~13px,
     "⋯" ~12x2px. They may have larger tap areas; that can't be confirmed from an image. [AI pass]
 - **Why it matters:** small, faint icons are hard to find and hit with a thumb.
@@ -124,7 +126,7 @@ These matter more than any single screen, because fixing one fixes many.
   large full-width rows.
 - **Problems:**
   - Buttons are labelled only with file extensions (".txt", ".docx", ".srt", ".vtt", ".md").
-    A non-technical user doesn't know what .srt or .vtt is. [mine]
+    A non-technical user doesn't know what .srt or .vtt is. [noticed, confirmed with AI]
   - Only ".txt" has an icon; the other rows don't. [AI pass]
   - "Choose language…" uses a different, larger font from every other control. [AI pass]
   - Helper copy is jargon: "for .txt and .docx; subtitles always carry timing". [AI pass]
@@ -183,7 +185,7 @@ These matter more than any single screen, because fixing one fixes many.
 - **Problems:**
   - The message shows a raw server code: "Couldn't load transcript (HTTP 503)." The failure may be
     on the server, but how it is *shown* is a UI choice. A user doesn't know what 503 means,
-    or whether their transcript is lost. [mine, corrected after AI pass]
+    or whether their transcript is lost. [noticed, confirmed with AI]
   - Tabs, search and download stay active with nothing loaded. [AI pass]
   - The header meta line is a lone "·". [AI pass]
   - No reassurance ("your transcript is safe") and no next step besides retry. [AI pass]
@@ -231,20 +233,20 @@ Things the screens don't show. I'd test them on the live product or ask, not gue
 
 ## The README's eight questions
 
-My answers so far. Lines marked **DECIDE** are design choices I still have to make.
+My answers, and the design decisions I'll build the redesign on.
 
 1. **The one thing a phone user came to do, and how many taps.** Read the transcript and find
    one moment in it: 0 taps to start reading, 3 to search (search icon, type, then manually
    scroll to the match, since search doesn't jump there). Copying the whole transcript takes
-   2 taps (⋯ → Copy transcript). **DECIDE:** make search jump to the match in place, and move
+   2 taps (⋯ → Copy transcript). Make search jump to the match in place, and move
    Copy out of the menu.
 2. **The Keep reading bar and the player at the bottom.** Together they take 158px, 28% of a
    320px screen, and the player can't even play. With the keyboard up, the bar, player and
-   keyboard would leave almost no room. **DECIDE:** one compact bottom bar; hide the player
+   keyboard would leave almost no room. One compact bottom bar; hide the player
    when audio is unavailable; hide the bar while the keyboard is up.
 3. **The nine More items.** Keep: Rename, File details, Delete (signed in only), Quiz.
    Move to screen: Copy. Remove: Home (back arrow covers it), "Timestamps: shown" (already in
-   Reading settings), Sign in (belongs in the preview bar, not a menu). **DECIDE** the final list.
+   Reading settings), Sign in (belongs in the preview bar, not a menu). That leaves four items, down from nine.
 4. **Search, download, settings: should they feel like one?** Yes. One sheet style, with a title
    and a close button, opening from the bottom.
 5. **The reader while still processing.** It needs: the file name, a plain status ("Transcribing
@@ -254,7 +256,9 @@ My answers so far. Lines marked **DECIDE** are design choices I still have to ma
 6. **A meeting with four speakers at 320px.** The current screens show one speaker only. Needs a
    short speaker label or colour per turn, without stealing width from the text.
    Note: the API docs say "Don't rely on a per-line speaker label in the transcript";
-   speakers are named in the summary. **DECIDE** how to show speakers honestly with that.
+   speakers are named in the summary. Decision: no speaker label on every line, because the API doesn't promise one. Instead,
+   a "Speakers" row under the title, using the names from the summary, and speaker names
+   on key quotes, where the API does provide them.
 7. **After selecting a line.** Copy the line *with its timestamp*, play from there (only when
    audio works), and select whole sentences, not half-segments.
 8. **Should desktop change?** Partly. Keep its layout; align the copy and upsell wording with the
